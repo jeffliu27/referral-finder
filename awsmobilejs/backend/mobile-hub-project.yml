@@ -1,0 +1,100 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      ReactSample: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: ReactSample
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /items: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/ReactSample-20180804193518.zip
+            description: 'Handler for calls to resource path : /items/{proxy+}'
+            enableCORS: true
+            environment:
+              MENU_TABLE_NAME: referralfinder-mobilehub-1623357858-bbq_menu_item
+              ORDERS_TABLE_NAME: referralfinder-mobilehub-1623357858-bbq_orders
+              RESTAURANTS_TABLE_NAME: referralfinder-mobilehub-1623357858-bbq_restaurants
+            handler: lambda.handler
+            hashcode: WbwAzKuzzNkgXuRJcMfrqxpwwfgQjH0Vf6gSte+OYgA=
+            memorySize: '128'
+            modified: '2018-08-04T23:35:41.297+0000'
+            name: ReactSample
+            runtime: nodejs6.10
+            timeout: '3'
+            version: 41YjKekqVhkWiwVw1R_u64o1XVMbpW4m
+          '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/ReactSample-20180804193518.zip
+            description: 'Handler for calls to resource path : /items/{proxy+}'
+            enableCORS: true
+            environment:
+              MENU_TABLE_NAME: referralfinder-mobilehub-1623357858-bbq_menu_item
+              ORDERS_TABLE_NAME: referralfinder-mobilehub-1623357858-bbq_orders
+              RESTAURANTS_TABLE_NAME: referralfinder-mobilehub-1623357858-bbq_restaurants
+            handler: lambda.handler
+            hashcode: WbwAzKuzzNkgXuRJcMfrqxpwwfgQjH0Vf6gSte+OYgA=
+            memorySize: '128'
+            modified: '2018-08-04T23:35:41.297+0000'
+            name: ReactSample
+            runtime: nodejs6.10
+            timeout: '3'
+            version: M4MLqWhww7kHlMRRL7c1JS9t2lPdGOii
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              id: S
+            hashKeyName: id
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-bbq_restaurants
+            tablePrivacy: public
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              id: S
+            hashKeyName: id
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-bbq_orders
+            tablePrivacy: public
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              id: S
+              restaurant_id: S
+            hashKeyName: restaurant_id
+            hashKeyType: S
+            rangeKeyName: id
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-bbq_menu_item
+            tablePrivacy: public
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: false
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          alias-attributes:
+            - email
+            - phone_number
+          mfa-configuration: ON
+          name: userpool
+          password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
+            min-length: '8'
+            require-lower-case: true
+            require-numbers: true
+            require-symbols: true
+            require-upper-case: true
+name: referral-finder-2018-08-04-19-30-22
+region: us-east-1
