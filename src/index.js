@@ -14,7 +14,8 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Main from './Main';
 import awsmobile from './aws-exports';
 import Amplify from 'aws-amplify';
-import { Authenticator, Greetings } from 'aws-amplify-react';
+// import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+// import { Authenticator, Greetings } from 'aws-amplify-react';
 import './css/general.css';
 
 Amplify.configure(awsmobile);
@@ -53,9 +54,8 @@ class App extends Component {
 
     render() {
         return (
-            <Authenticator hide={[Greetings]} federated={federated}>
+            // <Authenticator hide={[Greetings]} federated={federated}>
                 <Main  />
-            </Authenticator>
         );
     }
 }
