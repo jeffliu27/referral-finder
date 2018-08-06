@@ -1,5 +1,5 @@
 .nav-bar {
-  background: #e47911;
+  background: #2874A6  ;
   margin-bottom: 20px;
 }
 
@@ -20,6 +20,11 @@
 .button-holder {
   width:60%;
   margin-left: 20%
+}
+
+.search-button {
+  margin-right: 10px;
+  background: #2874A6;
 }
 
 .sample-app-enter {
@@ -53,4 +58,13 @@
 }
 .content-button {
   margin-bottom: 10px;
+  position: absolute;
+  right: 15%;
+  top: 25%;
+}
+.login-box {
+  display: block;
+  text-align: center;
+  /*margin: 10% 10% 10% 10%;*/
+  padding: 100px 0;
 }

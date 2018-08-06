@@ -15,7 +15,7 @@ import Main from './Main';
 import awsmobile from './aws-exports';
 import Amplify from 'aws-amplify';
 // import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
-// import { Authenticator, Greetings } from 'aws-amplify-react';
+import { Authenticator, Greetings } from 'aws-amplify-react';
 import './css/general.css';
 
 Amplify.configure(awsmobile);
@@ -25,11 +25,12 @@ require("babel-core/register");
 require("babel-polyfill");
 
 
-const federated = {
-    google_client_id: 'yourGoogleClientID',
-    facebook_app_id: 'yourFacebookClientID',
-    amazon_client_id: 'yourAmazonClientID'
-};
+// For Authenticator
+// const federated = {
+//     google_client_id: 'yourGoogleClientID',
+//     facebook_app_id: 'yourFacebookClientID',
+//     amazon_client_id: 'yourAmazonClientID'
+// };
 
 class App extends Component {
 
@@ -54,8 +55,15 @@ class App extends Component {
 
     render() {
         return (
-            // <Authenticator hide={[Greetings]} federated={federated}>
+            /*<div className="login-box">
+                <h2>Welcome to Referral Finder!</h2>
+                <Authenticator hide={[Greetings]}>
+                    <Main  />
+                </Authenticator>
+            </div>*/
+            <Authenticator hide={[Greetings]}>
                 <Main  />
+            </Authenticator>
         );
     }
 }

@@ -15,7 +15,6 @@ import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import { Button, Card, Row, Col, Navbar, NavItem } from 'react-materialize';
 import './css/general.css';
 import awsmobile from './aws-exports';
-import { withAuthenticator } from 'aws-amplify-react';
 import {Auth} from 'aws-amplify';
 
 class Main extends Component {
@@ -40,23 +39,24 @@ class Main extends Component {
                 { this.props.authState == 'signedIn' ?
                     (<BrowserRouter>
                         <div>
-                            <Navbar className='nav-bar' brand='WebApp' right>
+                            <Navbar className='nav-bar' brand='Referral Finder' right>
                                 <NavItem><Link to="/main/home">Home</Link></NavItem>
-                                <NavItem><Link to="/main/menus">Menu</Link></NavItem>
-                                <NavItem><Link to="/main/orders">Orders</Link></NavItem>
+                                {/*<NavItem><Link to="/main/menus">Menu</Link></NavItem>
+                                <NavItem><Link to="/main/orders">Orders</Link></NavItem>*/}
                                 <NavItem onClick={this.signOut}>Logout</NavItem>
                             </Navbar>
            
                             <div className="content">
-                                <h2>Serverless Restaurants App</h2>
-                                <h4>Welcome to the order system!</h4>
+                                {/*<h2>Referral Finder</h2>*/}
+                                {/*<h4>Find your next referral today!</h4>
+                                <br/>*/}
                             </div>
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/main/home" component={Home} />
-                                <Route exact path="/main/menus/:id" component={Menu} />
+                                {/*<Route exact path="/main/menus/:id" component={Menu} />
                                 <Route exact path="/main/menus" component={Menu} />
-                                <Route exact path="/main/orders" component={Orders} />
+                                <Route exact path="/main/orders" component={Orders} />*/}
                             </Switch>
                         </div>
                     </BrowserRouter>) : null
@@ -66,4 +66,4 @@ class Main extends Component {
     }
 }
 
-export default withAuthenticator(Main);
+export default Main;

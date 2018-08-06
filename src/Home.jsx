@@ -8,53 +8,96 @@ See the License for the specific language governing permissions and limitations 
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Row, Col, Navbar, NavItem, Icon } from 'react-materialize';
-import { Button, Image } from 'semantic-ui-react';
-
+import { Card, Row, Col, Navbar, NavItem, Icon, Input, Autocomplete, Button } from 'react-materialize';
+import { Image } from 'semantic-ui-react';
+// import { Form, FormGroup, FormControl, Col, Button } from 'react-bootstrap';
 import TableContent from './API/TableContent';
 import './css/general.css';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {API} from 'aws-amplify';
 
+const companyData = {
+    'Apple': null,
+    'Microsoft': null,
+    'Google': null,
+    'Facebook': null,
+    'IBM': null
+}
+
+const jobData = {
+    'Software Developer': null,
+    'Software Engineer': null,
+    'Quality Assurance': null,
+    'QA': null,
+    'Full Stack Developer': null,
+    'Frontend Developer': null,
+    'Backend Developer': null,
+    'Cloud Engineer': null
+}
+
 export default class Home extends Component {
 
-    state = {
-        data: [],
-        loading: null,
+    constructor(){
+        super();
+
+        this.state = {
+            data:[],
+            company: '',
+            job: '',
+            loading: null,
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    fetch = async () => {
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const title = target.title;
+        const name = target.name;
+        const id = target.id;
+
+        console.log("event ", event);
+        console.log("target ", target);
+        console.log( "value " + value + " name " + title + "id " );
+
+        this.setState({
+        [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+
         this.setState(() => {
             return {
                 loading: true
             }
         });
 
-        API.get('ReactSample','/items/restaurants')
-            .then(resp => {
-                this.setState({
-                    data: resp,
-                    loading: false
-                });
-            })
-            .catch (err => console.log(err))
+        console.log("submitting...");
     }
 
-    initRestaurant = async () => {
+    // fetch = async () => {
+    //     this.setState(() => {
+    //         return {
+    //             loading: true
+    //         }
+    //     });
 
-        API.post('ReactSample','/items/init')
-            .then(data => {
-                alert('Successfully inserted restaurants');
-                this.setState({
-                    data: data,
-                    loading: false
-                });
-            })
-            .catch (err => console.log(err))
-    }
+    //     API.get('ReactSample','/items/restaurants')
+    //         .then(resp => {
+    //             this.setState({
+    //                 data: resp,
+    //                 loading: false
+    //             });
+    //         })
+    //         .catch (err => console.log(err))
+    // }
 
     render() {
         console.log('data:' + JSON.stringify(this.state.data));
+        console.log(this.state);
         return (
             <CSSTransitionGroup
             transitionName="sample-app"
@@ -65,18 +108,33 @@ export default class Home extends Component {
             transitionEnter={true}
             transitionLeave={true}>
             <div className="content">
-                <h4>Load your local restaurants with the button below and click the name to view the menu</h4>
+                <h4>Please enter the company and job position that you are looking for</h4>
+                <div>
+                    <Row>
+                        {/*<Autocomplete s={10} title='Company Name' name='company' value={this.state.company} onChange={this.handleInputChange} data={companyData}></Autocomplete>
+                        <Autocomplete s={10} title='Job Position' name='job' value={this.state.job} onChange={this.handleInputChange} data={jobData}></Autocomplete>*/}
+                        <Input s={5} label="Company Name" onChange={this.handleInputChange} name='company' value={this.state.company} validate><Icon>location_city</Icon></Input>
+                        <Input s={5} label="Job Position" onChange={this.handleInputChange} name='job' value={this.state.job} validate><Icon>business_center</Icon></Input>
+                    </Row>    
+                </div>
+
                 <div className="content-button">
-                    <Button primary onClick={this.fetch}>
+                    <Button className="blue darken-2" floating icon='search' waves='teal' 
+                    onClick={this.handleSubmit}
+                    ></Button>
+                    {/*<Button primary onClick={this.fetch}>
                         List Restaurants
                     </Button>
                     <Button primary onClick={this.initRestaurant}>
                         Insert Restaurants
-                    </Button>
+                    </Button>*/}
                 </div>
-                <TableContent tableData={this.state.data} loading={this.state.loading} />
+                {/*<TableContent tableData={this.state.data} loading={this.state.loading} />*/}
             </div>
             </CSSTransitionGroup>
         );
     }
 }
+
+                // {/*<Button className="search-button" floating icon='search' waves='light' large onClick={this.handleSubmit}></Button>*/}
+                // {/*<button style="font-size:24px">List Referrals</button>*/}
