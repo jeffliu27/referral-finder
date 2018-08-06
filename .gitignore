@@ -7,4 +7,4 @@ awsmobilejs/.awsmobile/backend-build
 awsmobilejs/\#current-backend-info
 ~awsmobilejs-*/
 
-./node_modules
+/node_modules
